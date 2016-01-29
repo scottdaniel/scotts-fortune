@@ -1,0 +1,206 @@
+set showmatch
+set number
+let mapleader=","
+execute pathogen#infect()
+set nocompatible
+filetype off
+filetype plugin indent on 
+
+set backspace=2
+set expandtab
+set noerrorbells
+set ruler
+set shiftwidth=4 
+set tabstop=4
+set timeout
+set timeoutlen=3000
+set incsearch
+set hls
+set title
+filetype on
+syntax enable
+set background=dark
+colorscheme solarized
+let loaded_matchparen=1
+" Shortcut to rapidly toggle `set list`
+nmap <leader>l :set list!<CR>
+
+" Use the same symbols as TextMate for tabstops and EOLs
+set listchars=tab:▸\ ,eol:¬
+
+" This is supposed to take the visually highlighted text and put in
+" LHS of a search/replace
+" But it DOESN'T FUCKING WORK
+" vmap <leader>z :<C-U>%s/\<<c-r>*\>/
+
+inoremap <Del> 
+" While in insert mode move to begginning or end of line a la EMACS
+inoremap  <Esc>A
+inoremap  <Esc>I
+map K NUL
+map <F1> NUL
+map <space> 
+map - 
+map Q NUL
+map :Q :q!
+nmap :W :w
+nmap :X :x
+nmap :U :u
+"Execute the current line
+nmap <F6> :exec '!'.getline('.')
+
+iab psb  #!/usr/bin/env perluse strict;use warnings;use feature 'say';use autodie;
+iab pdb use Data::Dumper 'Dumper';warn "data = ", Dumper(), "\n";h
+
+" Check with Perl::Critic
+map <leader>z :w ! perlcritic %
+
+" Filter highlighted section through autoformat
+map <leader>f :! perl -MText::Autoformat -e'autoformat {all=>1,squeeze=>0}'
+
+" Filter highlighted section through perltidy
+map <leader>t :! perltidy
+
+" Find next "warn" statement
+map <leader>w :/^\s*warn
+
+" Set textwidth to 70
+map <leader>m :set tw=70
+
+" Check POD in current file
+map <leader>p :w ! perl -MPod::Checker -e 'podchecker shift' %
+
+map <leader>o :w ! perl -cw %
+
+" REM (comment) out highlighted section
+map <leader>c :s/^/#/
+" Un-REM
+map <leader>u :s/^#//
+
+if has("autocmd")
+  au BufRead *.sxp,*.lisp call LispStuff()
+  au BufRead *.html,*.svg,*.tmpl,*.tt,*.sql call HTMLStuff()
+  au BufRead *.js,*.jade call JavaScriptStuff()
+  au BufRead *.json call JSONStuff()
+  au BufRead *.pod call PODStuff()
+  au BufRead *.pl,*.pm,*.PL call PerlStuff()
+  au BufRead *.py call PythonStuff()
+  au BufRead *.rb call RubyStuff()
+endif
+
+function GetPerlFold() 
+   if getline(v:lnum) =~ '^\s*sub' 
+      return ">1" 
+   elseif getline(v:lnum + 2) =~ '^\s*sub' && getline(v:lnum + 1) =~ '^\s*$' 
+      return "<1" 
+   else 
+      return "=" 
+   endif 
+endfunction 
+
+function JavaScriptStuff()
+    set et
+    set ts=2
+    set sw=2
+    set tw=0
+    set equalprg=jslint
+
+    " REM (comment) out highlighted section
+    map <leader>c :s/^/\/\//
+
+    " Un-REM
+    map <leader>u :s/^\/\///
+
+    map <leader>o :w ! jslint -process %
+
+endfunction
+
+function JSONStuff()
+    set et
+    set ts=2
+    set sw=2
+    set tw=0
+    set equalprg=jsonlint
+
+    map <leader>o :w ! jsonlint %
+endfunction
+
+function HTMLStuff()
+    set et
+    set ts=2
+    set sw=2
+    set tw=0
+    set equalprg=tidy
+    set syntax=html
+    set filetype=html
+endfunction
+
+function LispStuff()
+    set et
+    set ts=2
+    set sw=2
+    set tw=0
+    set equalprg=lisp
+    set showmatch
+    set matchtime=1
+endfunction
+
+function PODStuff()
+    set et
+    set ts=2
+    set sw=2
+    set tw=70
+endfunction
+
+function PerlStuff()
+    set et
+    set ts=4
+    set sw=4
+    set tw=0
+    set equalprg=perltidy
+    setlocal foldmethod=expr 
+
+    " REM (comment) out highlighted section
+    map <leader>c :s/^/#/
+    " Un-REM
+    map <leader>u :s/^#//
+
+    " Get Perl to do syntax check with warnings on this file
+    map <leader>o :w ! perl -cw %
+
+endfunction
+
+function PythonStuff()
+    "set et
+    "set ts=2
+    "set sw=2
+    "set tw=0
+
+    map <leader>c :s/^/#/
+    map <leader>u :s/^#//
+
+    map <leader>o :w ! python -m py_compile %
+endfunction
+
+function RubyStuff()
+    set et
+    set ts=2
+    set sw=2
+    set tw=0
+
+    map <leader>c :s/^/#/
+    map <leader>u :s/^#//
+
+    " Get Perl to do syntax check with warnings on this file
+    map <leader>o :w ! ruby -c %
+endfunction
+
+" Toggle Spell Check
+map <leader>s :call Toggle_spell()
+function Toggle_spell()
+    if has("spell")
+        set spell!
+    else
+        set spell
+    endif
+endfunction

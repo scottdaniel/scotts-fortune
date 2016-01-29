@@ -1,0 +1,127 @@
+# Sample .profile for SuSE Linux
+# rewritten by Christian Steinruecken <cstein@suse.de>
+#
+# This file is read each time a login shell is started.
+# All other interactive shells will only read .bashrc; this is particularly
+# important for language settings, see below.
+
+# load modules if on HPC
+if test -n $MODULEPATH
+    then module load blas hdf5 R/3.2.1
+    else echo no modulepath loaded yet
+fi
+
+test -z "$PROFILEREAD" && . /etc/profile
+
+# Most applications support several languages for their output.
+# To make use of this feature, simply uncomment one of the lines below or
+# add your own one (see /usr/share/locale/locale.alias for more codes)
+#
+#export LANG=de_DE.UTF-8	# uncomment this line for German output
+#export LANG=fr_FR.UTF-8	# uncomment this line for French output
+#export LANG=es_ES.UTF-8	# uncomment this line for Spanish output
+
+wiki() { dig +short txt $1.wp.dg.cx; }
+
+test -s ~/.alias && . ~/.alias || true
+
+#set umask so that I don't screwup permissions
+umask 0002
+
+###########
+# ALIASES #
+###########
+alias cdfrst='cd $(ls --group-directories-first | head -1)' #cd's into the first directory
+alias whoison="w | more"
+alias goref="cd /gsfs1/rsgrps/bhurwitz/hurwitzlab/data/reference"
+alias gohome="cd ~"
+alias goxdisk="cd /gsfs1/xdisk/scottdaniel/"
+alias l="ls -alh --time-style=+"%Y-%m-%d-%T""
+alias gotb="cd /gsfs1/rsgrps/zarnescu"
+alias gotrap="cd /gsfs1/rsgrps/zarnescu/TRAP"
+alias gohl="cd /gsfs1/rsgrps/bhurwitz/scottdaniel"
+alias moduel="module"
+
+#################
+# perl settings #
+#################
+#alias perl="/rsgrps/bhurwitz/hurwitzlab/bin/perl"
+#export PERL="/rsgrps/bhurwitz/hurwitzlab/bin/perl"
+#export HL_COMMON="/rsgrps/bhurwitz/hurwitzlab"
+#export PERL5LIB="$HOME/lib/lib/perl5:$HL_COMMON/perl5/lib/perl5:$PERL5LIB"
+#export PERL5LIB="$HOME/lib/lib/perl5" #don't hate me for the lib lib
+#export PERL_CPANM_OPT="-l $HOME/lib"
+#Now trying perlbrew (SEE BOTTOM)
+
+##################
+# R settings #####
+##################
+R_LIBS="~/R/library"
+export R_LIBS
+
+##################
+# Python Settings#
+##################
+export PYTHONPATH="/home/u18/scottdaniel/lib/python2.7/site-packages/"
+#not using their damn python install until they upgrade
+#export PYTHONPATH="$PYTHONPATH:/uaopt/python/2.7.3/lib/python2.7/site-packages"
+export PYTHON="$HOME/bin/python"
+
+##################
+# my fav. editor #
+##################
+export VISUAL=vim
+export EDITOR=$VISUAL
+
+#################
+# path settings #
+#################
+export PATH="$HOME/bin:$PATH:$HOME/.local/bin"
+export PATH="$PATH:$HOME/sratoolkit/bin"
+export PATH="$PATH:$HOME/readxplorer_2.0.1/bin"
+export PATH="$PATH:/rsgrps/bhurwitz/hurwitzlab/bin/"
+export MANPATH="$HOME/bin/share/man:$MANPATH"
+#stuff for gsl
+export LD_LIBRARY_PATH="$HOME/lib"
+export LIBRARY_PATH="$HOME/lib"
+#stuff for c/c++ compiling
+export CPPFLAGS="-I$HOME/include"
+export CCFLAGS="$CCFLAGS -I/home/u18/scottdaniel/include"
+export LDFLAGS="$LDFLAGS -L/home/u18/scottdaniel/lib"
+# Some people don't like fortune. If you uncomment the following lines,
+# you will have a fortune each time you log in ;-)
+
+if [ -x $HOME/bin/fortune ] ; then
+    echo
+    fortune $HOME/fortunes/fortunes
+    echo
+fi
+
+# Function for uploading a file to home directory on lytic
+function scplyt {
+	for file in $*; do
+		if [ -e "$file" ]; then	
+			scp $file scottdaniel@lytic.hpc.arizona.edu:/home/u18/scottdaniel/
+		else
+			echo "$file does not exist"
+		fi
+	done
+}
+
+# Function to change directory and then ls it
+function cdls {
+    cd $*
+    ls
+}
+
+# pip bash completion start
+_pip_completion()
+{
+    COMPREPLY=( $( COMP_WORDS="${COMP_WORDS[*]}" \
+                   COMP_CWORD=$COMP_CWORD \
+                   PIP_AUTO_COMPLETE=1 $1 ) )
+}
+complete -o default -F _pip_completion pip
+# pip bash completion end
+
+source ~/perl5/perlbrew/etc/bashrc
