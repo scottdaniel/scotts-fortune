@@ -1,0 +1,22 @@
+[user]
+	name = Scott G. Daniel
+	email = scottdaniel25@gmail.com
+[push]
+	default = matching
+[core]
+    autocrlf = input
+    safecrlf = true
+[alias]
+    co = checkout
+    ci = commit
+    st = status
+    br = branch
+    hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
+    type = cat-file -t
+    dump = cat-file -p
+
+[merge]
+	tool = vimdiff
+	conflictstyle = diff3
+[mergetool]
+	prompt = false
