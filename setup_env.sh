@@ -1,7 +1,10 @@
 echo Welcome to Scott\'s environment setup script!
 
 export HOME=$HOME
-module load git
+
+echo Setting gitconfig
+cp ./gitconfig $HOME/.gitconfig
+cp ./dir_colors $HOME/.dir_colors  
 
 if [ -e $HOME/.profile ] && [ ! -e $HOME/.profile.bkp ];
     cp $HOME/.profile $HOME/.profile.bkp
@@ -31,5 +34,15 @@ curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 cd ~/.vim/bundle && \
 git clone git://github.com/tpope/vim-sensible.git
 
+echo Setting up perlbrew
+\curl -L http://install.perlbrew.pl | bash
+
+echo Setting up anaconda 
+echo This may take a while
+wget https://3230d63b5fc54e62148e-c95ac804525aac4b6dba79b00b39d1d3.ssl.cf1.rackcdn.com/Anaconda2-2.4.1-Linux-x86_64.sh
+bash Anaconda2-2.4.1-Linux-x86_64.sh
+
 echo Setting up pip
 python ./get-pip.py install --root $HOME
+
+
