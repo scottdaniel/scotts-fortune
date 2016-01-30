@@ -53,13 +53,6 @@ git clone git://github.com/tpope/vim-sensible.git
 git clone git://github.com/altercation/vim-colors-solarized.git
 cd $INSTALL_DIR
 
-echo Setting up perlbrew
-\curl -L http://install.perlbrew.pl | bash
-perlbrew init
-echo Have to do the rest on your own
-echo since it involves opening new terminals
-echo and manually editing .profile / .bashrc
-
 echo Setting up anaconda 
 echo This may take a while
 wget https://3230d63b5fc54e62148e-c95ac804525aac4b6dba79b00b39d1d3.ssl.cf1.rackcdn.com/Anaconda2-2.4.1-Linux-x86_64.sh
@@ -76,6 +69,15 @@ cp fortune ~/bin
 cd $INSTALL_DIR
 cp -r fortunes/ ~/
 
+echo Setting up perlbrew
+\curl -L http://install.perlbrew.pl | bash
+perlbrew init
+echo "#Added for perlbrew" >> ~/.profile
+echo "source ~/perl5/perlbrew/etc/bashrc" >> ~/.profile
+echo Have to do the rest on your own
+echo by opening a new terminal 
+echo and running setup_perlbrew.sh
+read -p "Press [Enter] key"
 
 #Not needed with anaconda
 #echo Setting up pip
