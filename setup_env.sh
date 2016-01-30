@@ -1,10 +1,24 @@
 echo Welcome to Scott\'s environment setup script!
 
 export HOME=$HOME
+export INSTALL_DIR=$(pwd)
 
 echo Setting gitconfig
 cp ./gitconfig $HOME/.gitconfig
-cp ./dir_colors $HOME/.dir_colors  
+echo Setting up dir_colors from solarized
+cp ./dir_colors $HOME/.dir_colors
+echo Setting up newplrc for kyclark\'s new.pl script
+cp ./newplrc $HOME/.newplrc
+
+echo Lets get some favorite gits
+cd $HOME
+if [ ! -d src ];
+    mkdir -p src
+fi
+cd src
+git clone git@github.com:huyz/dircolors-solarized.git
+git clone git@github.com:kyclark/abe487.git kyclark
+cd $INSTALL_DIR
 
 if [ -e $HOME/.profile ] && [ ! -e $HOME/.profile.bkp ];
     cp $HOME/.profile $HOME/.profile.bkp
@@ -45,4 +59,15 @@ bash Anaconda2-2.4.1-Linux-x86_64.sh
 echo Setting up pip
 python ./get-pip.py install --root $HOME
 
+if [ -z $(which pip) ]; then
+    echo pip didn\'t install aborting
+    exit 1
+else
+    echo Setting up numpy ::crosses fingers::
+    pip install --root $HOME numpy
+    echo Setting up scipy
+    pip install --root $HOME scipy
+fi
+
+echo All done! \{hopefully\}
 

@@ -7,6 +7,7 @@
     autocrlf = input
     safecrlf = true
 [alias]
+    up = remote -v show origin
     co = checkout
     ci = commit
     st = status
