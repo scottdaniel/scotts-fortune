@@ -20,6 +20,9 @@ git clone git@github.com:huyz/dircolors-solarized.git
 git clone git@github.com:kyclark/abe487.git kyclark
 cd $INSTALL_DIR
 
+echo And copy over some favorite programs \(extract and install needed\)
+cp src/* $HOME/src/
+
 if [ -e $HOME/.profile ] && [ ! -e $HOME/.profile.bkp ];
     cp $HOME/.profile $HOME/.profile.bkp
     cat ./profile_default >> $HOME/.profile
