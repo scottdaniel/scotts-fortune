@@ -50,27 +50,46 @@ curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 
 cd ~/.vim/bundle && \
 git clone git://github.com/tpope/vim-sensible.git
+git clone git://github.com/altercation/vim-colors-solarized.git
+cd $INSTALL_DIR
 
 echo Setting up perlbrew
 \curl -L http://install.perlbrew.pl | bash
+perlbrew init
+echo Have to do the rest on your own
+echo since it involves opening new terminals
+echo and manually editing .profile / .bashrc
 
 echo Setting up anaconda 
 echo This may take a while
 wget https://3230d63b5fc54e62148e-c95ac804525aac4b6dba79b00b39d1d3.ssl.cf1.rackcdn.com/Anaconda2-2.4.1-Linux-x86_64.sh
 bash Anaconda2-2.4.1-Linux-x86_64.sh
 
-echo Setting up pip
-python ./get-pip.py install --root $HOME
-
-if [ -z $(which pip) ]; then
-    echo pip didn\'t install aborting
-    exit 1
-else
-    echo Setting up numpy ::crosses fingers::
-    pip install --root $HOME numpy
-    echo Setting up scipy
-    pip install --root $HOME scipy
+echo Setting up fortune
+tar -xzf src/fortune.0.2.tar.gz
+cd fortune-0.2
+make
+if [ ! -d ~/bin ]; then
+    mkdir -p ~/bin
 fi
+cp fortune ~/bin
+cd $INSTALL_DIR
+cp -r fortunes/ ~/
 
+
+#Not needed with anaconda
+#echo Setting up pip
+#python ./get-pip.py install --root $HOME
+#
+#if [ -z $(which pip) ]; then
+#    echo pip didn\'t install aborting
+#    exit 1
+#else
+#    echo Setting up numpy ::crosses fingers::
+#    pip install --root $HOME numpy
+#    echo Setting up scipy
+#    pip install --root $HOME scipy
+#fi
+#
 echo All done! \{hopefully\}
 
