@@ -12,7 +12,7 @@ cp ./newplrc $HOME/.newplrc
 
 echo Lets get some favorite gits
 cd $HOME
-if [ ! -d src ];
+if [ ! -d src ]; then
     mkdir -p src
 fi
 cd src
@@ -23,7 +23,7 @@ cd $INSTALL_DIR
 echo And copy over some favorite programs \(extract and install needed\)
 cp src/* $HOME/src/
 
-if [ -e $HOME/.profile ] && [ ! -e $HOME/.profile.bkp ];
+if [ -e $HOME/.profile ] && [ ! -e $HOME/.profile.bkp ]; then
     cp $HOME/.profile $HOME/.profile.bkp
     cat ./profile_default >> $HOME/.profile
     echo Added stuff to .profile
@@ -33,7 +33,7 @@ else
     echo Created a .profile for you
 fi
 
-if [ -e $HOME/.vimrc ] && [ ! -e $HOME/.vimrc.bkp ];
+if [ -e $HOME/.vimrc ] && [ ! -e $HOME/.vimrc.bkp ]; then
     cp $HOME/.vimrc $HOME/.vimrc.bkp
     cat ./vimrc_default >> $HOME/.vimrc
     echo Added stuff to .vimrc
