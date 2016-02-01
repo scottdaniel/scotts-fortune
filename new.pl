@@ -27,8 +27,8 @@ optional description can be provided to place into the POD.
 
 You can put all the above options into a "~/.newplrc" file, e.g.:
 
-    full_name=Scott Daniel
-    email=scottdaniel@email.arizona.edu
+    full_name=Ken Youens-Clark
+    email=kyclark@email.arizona.edu
     perl_path=/uaopt/perl/5.14.2/bin/perl
     copyright=Hurwitz Lab
 
@@ -178,34 +178,32 @@ use Getopt::Long;
 use Pod::Usage;
 use Readonly;
 
-my %opts = get_opts();
-
-if ($opts{'help'} || $opts{'man'}) {
-    pod2usage({
-        -exitval => 0,
-        -verbose => $opts{'man'} ? 2 : 1
-    });
-}
-
-#
-# Start coding here
-#
-
-# If you need @ARGV
-# my @args = @ARGV;
-
-say "OK";
+main();
 
 # --------------------------------------------------
-sub get_opts {
-    my %opts;
+sub main {
+    my %args = get_args();
+
+    if ($args{'help'} || $args{'man_page'}) {
+        pod2usage({
+            -exitval => 0,
+            -verbose => $args{'man_page'} ? 2 : 1
+        });
+    }; 
+
+    say "OK";
+}
+
+# --------------------------------------------------
+sub get_args {
+    my %args;
     GetOptions(
-        \%opts,
+        \%args,
         'help',
         'man',
     ) or pod2usage(2);
 
-    return %opts;
+    return %args;
 }
 
 [% end_tag %]
