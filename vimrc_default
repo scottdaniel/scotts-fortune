@@ -1,3 +1,4 @@
+set nohlsearch
 set showmatch
 set number
 let mapleader=","
