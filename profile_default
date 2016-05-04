@@ -109,3 +109,9 @@ complete -o default -F _pip_completion pip
 # pip bash completion end
 
 source ~/perl5/perlbrew/etc/bashrc
+
+#function to go up directories quickly
+up()
+{
+    cd $(eval "printf '../'%.0s {1..$1}") && pwd
+}
