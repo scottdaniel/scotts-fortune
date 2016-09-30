@@ -64,6 +64,7 @@ export EDITOR=$VISUAL
 # path settings #
 #################
 export PATH="$HOME/bin:$PATH:$HOME/.local/bin"
+export PATH="$PATH:$HOME/perl5/perlbrew/bin"
 export MANPATH="$HOME/bin/share/man:$MANPATH"
 #stuff for gsl
 export LD_LIBRARY_PATH="$HOME/lib"
