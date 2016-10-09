@@ -70,7 +70,8 @@ cd $INSTALL_DIR
 cp -r fortunes/ ~/
 
 echo Setting up perlbrew
-\curl -L http://install.perlbrew.pl | bash
+curl -L http://install.perlbrew.pl | bash
+sleep 1
 perlbrew init
 echo "#Added for perlbrew" >> ~/.profile
 echo "source ~/perl5/perlbrew/etc/bashrc" >> ~/.profile
