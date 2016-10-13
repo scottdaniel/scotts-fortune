@@ -18,6 +18,7 @@ fi
 cd src
 git clone git@github.com:huyz/dircolors-solarized.git
 git clone git@github.com:kyclark/abe487.git kyclark
+git clone git@github.com:brentp/bio-playground.git
 cd $INSTALL_DIR
 
 echo And copy over some favorite programs \(extract and install needed\)
