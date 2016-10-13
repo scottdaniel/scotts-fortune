@@ -16,7 +16,6 @@ set tabstop=4
 set timeout
 set timeoutlen=3000
 set incsearch
-set hls
 set title
 filetype on
 syntax enable
