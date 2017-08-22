@@ -109,7 +109,10 @@ _pip_completion()
 complete -o default -F _pip_completion pip
 # pip bash completion end
 
-source ~/perl5/perlbrew/etc/bashrc
+if [[ -n $(which perlbrew) ]]
+    then source ~/perl5/perlbrew/etc/bashrc
+    else echo "perlbrew doesnt exist"
+fi
 
 #function to go up directories quickly
 up()
