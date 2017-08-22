@@ -8,7 +8,7 @@
 # load modules if on HPC
 if [[ -n $MODULEPATH ]]
     then module load blas hdf5 R/3.2.1
-    else echo no modulepath loaded yet / or no module system
+    else echo "no modulepath loaded yet / or no module system, no worries"
 fi
 
 test -z "$PROFILEREAD" && . /etc/profile
@@ -117,7 +117,7 @@ complete -o default -F _pip_completion pip
 
 if [[ -n $(which perlbrew) ]]
     then source ~/perl5/perlbrew/etc/bashrc
-    else echo "perlbrew doesnt exist"
+    else echo "perlbrew doesnt exist, no worries"
 fi
 
 #function to go up directories quickly
