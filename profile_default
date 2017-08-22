@@ -6,9 +6,9 @@
 # important for language settings, see below.
 
 # load modules if on HPC
-if test -n $MODULEPATH
+if [[ -n $MODULEPATH ]]
     then module load blas hdf5 R/3.2.1
-    else echo no modulepath loaded yet
+    else echo no modulepath loaded yet / or no module system
 fi
 
 test -z "$PROFILEREAD" && . /etc/profile
