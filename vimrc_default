@@ -1,8 +1,9 @@
+execute pathogen#infect()
+
 set nohlsearch
 set showmatch
 set number
 let mapleader=","
-execute pathogen#infect()
 set nocompatible
 filetype off
 filetype plugin indent on 
@@ -48,15 +49,6 @@ nmap :X :x
 nmap :U :u
 "Execute the current line
 nmap <F6> :exec '!'.getline('.')
-
-iab psb  #!/usr/bin/env perl
-
-use strict;
-use warnings;
-use feature 'say';
-use autodie;
-iab pdb use Data::Dumper 'Dumper';
-warn "data = ", Dumper(), "\n";h
 
 " Check with Perl::Critic
 map <leader>z :w ! perlcritic %
