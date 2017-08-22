@@ -35,7 +35,13 @@ alias cdfrst='cd $(ls --group-directories-first | head -1)' #cd's into the first
 alias whoison="w | more"
 alias gohome="cd ~"
 alias l="ls -alh --time-style=+"%Y-%m-%d-%T""
+alias ls='ls -G --color=always'
 alias moduel="module"
+
+############
+# dircolor #
+############
+eval `dircolors ~/.dir_colors`
 
 #################
 # perl settings #
