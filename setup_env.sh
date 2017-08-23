@@ -4,7 +4,7 @@ export HOME=$HOME
 export INSTALL_DIR=$(pwd)
 
 echo Setting gitconfig
-cp ./gitconfig $HOME/.gitconfig
+cp ./gitconfig_default $HOME/.gitconfig
 echo Setting up dir_colors from solarized
 cp ./dir_colors $HOME/.dir_colors
 echo Setting up newplrc for kyclark\'s new.pl script
