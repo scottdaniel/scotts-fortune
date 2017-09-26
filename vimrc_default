@@ -26,6 +26,10 @@ let loaded_matchparen=1
 " Shortcut to rapidly toggle `set list`
 nmap <leader>l :set list!<CR>
 
+" Shortcut to rapidly toggle `set number` i.e. line numbers
+" Important for copying multi-line commands
+nmap <leader>n :set number!<CR>
+
 " Use the same symbols as TextMate for tabstops and EOLs
 set listchars=tab:▸\ ,eol:¬
 
@@ -71,9 +75,9 @@ map <leader>p :w ! perl -MPod::Checker -e 'podchecker shift' %
 map <leader>o :w ! perl -cw %
 
 " REM (comment) out highlighted section
-map <leader>c :s/^/#/
+map <leader>c :s/^/#/<CR>
 " Un-REM
-map <leader>u :s/^#//
+map <leader>u :s/^#//<CR>
 
 if has("autocmd")
   au BufRead *.sxp,*.lisp call LispStuff()
