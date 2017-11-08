@@ -4,11 +4,11 @@ export HOME=$HOME
 export INSTALL_DIR=$(pwd)
 
 echo Setting gitconfig
-cp ./gitconfig_default $HOME/.gitconfig
+#cp ./gitconfig_default $HOME/.gitconfig
 echo Setting up dir_colors from solarized
-cp ./dir_colors $HOME/.dir_colors
+#cp ./dir_colors $HOME/.dir_colors
 echo Setting up newplrc for kyclark\'s new.pl script
-cp ./newplrc $HOME/.newplrc
+#cp ./newplrc $HOME/.newplrc
 
 echo Lets get some favorite gits
 cd $HOME
@@ -16,9 +16,9 @@ if [ ! -d src ]; then
     mkdir -p src
 fi
 cd src
-git clone git@github.com:huyz/dircolors-solarized.git
-git clone git@github.com:kyclark/abe487.git kyclark
-git clone git@github.com:brentp/bio-playground.git
+#git clone git@github.com:huyz/dircolors-solarized.git
+#git clone git@github.com:kyclark/abe487.git kyclark
+#git clone git@github.com:brentp/bio-playground.git
 cd $INSTALL_DIR
 
 echo And copy over some favorite programs \(extract and install needed\)
@@ -52,12 +52,13 @@ curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 cd ~/.vim/bundle && \
 git clone git://github.com/tpope/vim-sensible.git
 git clone git://github.com/altercation/vim-colors-solarized.git
+git clone https://github.com/powerman/vim-plugin-AnsiEsc.git
 cd $INSTALL_DIR
 
 echo Setting up anaconda 
 echo This may take a while
-wget https://3230d63b5fc54e62148e-c95ac804525aac4b6dba79b00b39d1d3.ssl.cf1.rackcdn.com/Anaconda2-2.4.1-Linux-x86_64.sh
-bash Anaconda2-2.4.1-Linux-x86_64.sh
+#wget https://3230d63b5fc54e62148e-c95ac804525aac4b6dba79b00b39d1d3.ssl.cf1.rackcdn.com/Anaconda2-2.4.1-Linux-x86_64.sh
+#bash Anaconda2-2.4.1-Linux-x86_64.sh
 
 echo Setting up fortune
 tar -xzf src/fortune.0.2.tar.gz
@@ -71,9 +72,9 @@ cd $INSTALL_DIR
 cp -r fortunes/ ~/
 
 echo Setting up perlbrew
-curl -L http://install.perlbrew.pl | bash
+#curl -L http://install.perlbrew.pl | bash
 sleep 1
-perlbrew init
+#perlbrew init
 echo "#Added for perlbrew" >> ~/.profile
 echo "source ~/perl5/perlbrew/etc/bashrc" >> ~/.profile
 echo Have to do the rest on your own
