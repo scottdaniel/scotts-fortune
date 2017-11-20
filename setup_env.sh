@@ -4,11 +4,11 @@ export HOME=$HOME
 export INSTALL_DIR=$(pwd)
 
 echo Setting gitconfig
-#cp ./gitconfig_default $HOME/.gitconfig
+cp ./gitconfig_default $HOME/.gitconfig
 echo Setting up dir_colors from solarized
-#cp ./dir_colors $HOME/.dir_colors
+cp ./dir_colors $HOME/.dir_colors
 echo Setting up newplrc for kyclark\'s new.pl script
-#cp ./newplrc $HOME/.newplrc
+cp ./newplrc $HOME/.newplrc
 
 echo Lets get some favorite gits
 cd $HOME
@@ -16,9 +16,10 @@ if [ ! -d src ]; then
     mkdir -p src
 fi
 cd src
-#git clone git@github.com:huyz/dircolors-solarized.git
-#git clone git@github.com:kyclark/abe487.git kyclark
-#git clone git@github.com:brentp/bio-playground.git
+git clone git@github.com:huyz/dircolors-solarized.git
+git clone git@github.com:kyclark/abe487.git kyclark
+git clone git@github.com:brentp/bio-playground.git
+cp ./kyclark/python/new_py/new_py.py $HOME #cool script for creating new pythons
 cd $INSTALL_DIR
 
 echo And copy over some favorite programs \(extract and install needed\)
@@ -57,8 +58,8 @@ cd $INSTALL_DIR
 
 echo Setting up anaconda 
 echo This may take a while
-#wget https://3230d63b5fc54e62148e-c95ac804525aac4b6dba79b00b39d1d3.ssl.cf1.rackcdn.com/Anaconda2-2.4.1-Linux-x86_64.sh
-#bash Anaconda2-2.4.1-Linux-x86_64.sh
+wget https://repo.continuum.io/archive/Anaconda2-5.0.1-Linux-x86_64.sh 
+bash Anaconda2-5.0.1-Linux-x86_64.sh
 
 echo Setting up fortune
 tar -xzf src/fortune.0.2.tar.gz
@@ -71,17 +72,17 @@ cp fortune ~/bin
 cd $INSTALL_DIR
 cp -r fortunes/ ~/
 
-echo Setting up perlbrew
-#curl -L http://install.perlbrew.pl | bash
-sleep 1
-#perlbrew init
-echo "#Added for perlbrew" >> ~/.profile
-echo "source ~/perl5/perlbrew/etc/bashrc" >> ~/.profile
-echo Have to do the rest on your own
-echo by opening a new terminal 
-echo and running setup_perlbrew.sh
-read -p "Press [Enter] key"
-
+#echo Setting up perlbrew
+##curl -L http://install.perlbrew.pl | bash
+#sleep 1
+##perlbrew init
+#echo "#Added for perlbrew" >> ~/.profile
+#echo "source ~/perl5/perlbrew/etc/bashrc" >> ~/.profile
+#echo Have to do the rest on your own
+#echo by opening a new terminal 
+#echo and running setup_perlbrew.sh
+#read -p "Press [Enter] key"
+#
 #Not needed with anaconda
 #echo Setting up pip
 #python ./get-pip.py install --root $HOME
