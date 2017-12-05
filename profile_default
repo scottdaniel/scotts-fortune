@@ -82,10 +82,16 @@ export LDFLAGS="$LDFLAGS -L$HOME/lib"
 # Some people don't like fortune. If you uncomment the following lines,
 # you will have a fortune each time you log in ;-)
 
-if [ -x $HOME/bin/fortune ] ; then
-    echo
-    fortune $HOME/fortunes/fortunes
-    echo
+if [[ $(echo $HOSTNAME) == *"login"* ]]; then
+    if [ -x $PYTHONBIN/fortune ] ; then
+        echo
+        echo "=============== Quote Of The Day ==============="
+        echo
+        fortune $HOME/morefortunes/data/fortunes
+        echo
+        echo "================================================"
+        echo
+    fi
 fi
 
 # Function for uploading a file to home directory on lytic
