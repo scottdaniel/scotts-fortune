@@ -31,7 +31,11 @@ umask 0002
 ###########
 # ALIASES #
 ###########
-alias cdfrst='cd $(~/bin/ls --group-directories-first | head -1)' #cd's into the first directory
+#see all hidden files and nothing else
+alias linvis='ls -d .?*'
+#cd's into the first directory
+alias cdfrst='cd $(~/bin/ls --group-directories-first | head -1)' 
+
 alias whoison="w | more"
 alias gohome="cd ~"
 alias l="ls -alh --time-style=+"%Y-%m-%d-%T""
@@ -41,6 +45,9 @@ alias gohl="cd /rsgrps/bhurwitz/scottdaniel"
 alias goref="cd /rsgrps/bhurwitz/hurwitzlab/data/reference" 
 alias vime="vim -c Ex"
 alias qstatme="qstat -t -u scottdaniel"
+alias nod='echo You nod.'
+alias laugh='echo You laugh out loud!'
+alias lol='laugh'
 
 ############
 # dircolor #

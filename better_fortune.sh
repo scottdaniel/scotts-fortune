@@ -12,8 +12,12 @@ fi
 
 cd ~
 
-git clone git@github.com:ruanyf/fortunes.git fortunes
+git clone git@github.com:ruanyf/fortunes.git morefortunes
 
-cd fortunes
+cd morefortunes
+
+
+fortune -u ./data/fortunes
+
 
 
