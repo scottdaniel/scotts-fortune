@@ -17,7 +17,7 @@ if [ ! -d src ]; then
 fi
 cd src
 git clone git@github.com:huyz/dircolors-solarized.git
-git clone git@github.com:kyclark/abe487.git kyclark
+git clone git@github.com:kyclark/metagenomics-book.git
 git clone git@github.com:brentp/bio-playground.git
 cp ./kyclark/python/new_py/new_py.py $HOME #cool script for creating new pythons
 cd $INSTALL_DIR
