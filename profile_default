@@ -31,6 +31,7 @@ umask 0002
 ###########
 # ALIASES #
 ###########
+alias gitundel='git diff --no-renames --name-only --diff-filter=D -z | xargs -0 git co -- ' #will undelete files that you may have accidently deleted in the last commit, FTW!
 #see all hidden files and nothing else
 alias linvis='ls -d .?*'
 #cd's into the first directory
