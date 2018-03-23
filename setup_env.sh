@@ -5,6 +5,8 @@ export INSTALL_DIR=$(pwd)
 
 echo Setting gitconfig
 cp ./gitconfig_default $HOME/.gitconfig
+#NB: the git filter needs "conda install jq" to work
+cp ./gitattributes_global $HOME/.gitconfig
 echo Setting up dir_colors from solarized
 cp ./dir_colors $HOME/.dir_colors
 echo Setting up newplrc for kyclark\'s new.pl script
@@ -16,10 +18,15 @@ if [ ! -d src ]; then
     mkdir -p src
 fi
 cd src
+
 git clone git@github.com:huyz/dircolors-solarized.git
 git clone git@github.com:kyclark/metagenomics-book.git
 git clone git@github.com:brentp/bio-playground.git
 cp ./kyclark/python/new_py/new_py.py $HOME #cool script for creating new pythons
+git clone https://github.com/tj/git-extras.git
+cd git-extras
+git checkout $(git describe --tags $(git rev-list --tags --max-count=1))
+make install PREFIX=$HOME
 cd $INSTALL_DIR
 
 echo And copy over some favorite programs \(extract and install needed\)

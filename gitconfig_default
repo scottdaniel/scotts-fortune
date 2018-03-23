@@ -2,10 +2,11 @@
 	name = Scott G. Daniel
 	email = scottdaniel25@gmail.com
 [push]
-	default = matching
+	default = current
 [core]
     autocrlf = input
     safecrlf = true
+    attributesfile = ~/.gitattributes_global
 [alias]
     up = remote -v show origin
     co = checkout
@@ -20,4 +21,14 @@
 	tool = vimdiff
 	conflictstyle = diff3
 [mergetool]
-	prompt = false
+    prompt = false
+
+[filter "nbstrip_full"]
+clean = "jq --indent 1 \
+        '(.cells[] | select(has(\"outputs\")) | .outputs) = []  \
+        | (.cells[] | select(has(\"execution_count\")) | .execution_count) = null  \
+        | .metadata = {\"language_info\": {\"name\": \"python\", \"pygments_lexer\": \"ipython3\"}} \
+        | .cells[].metadata = {} \
+        '"
+smudge = cat
+required = true
