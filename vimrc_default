@@ -30,6 +30,9 @@ nmap <leader>l :set list!<CR>
 " Important for copying multi-line commands
 nmap <leader>n :set number!<CR>
 
+" Shortcut to toggle paste mode
+nmap <leader>p :set paste!<CR>
+
 " Use the same symbols as TextMate for tabstops and EOLs
 set listchars=tab:▸\ ,eol:¬
 
@@ -53,32 +56,6 @@ nmap :X :x
 nmap :U :u
 "Execute the current line
 nmap <F6> :exec '!'.getline('.')
-
-" Check with Perl::Critic
-map <leader>z :w ! perlcritic %
-
-" Filter highlighted section through autoformat
-map <leader>f :! perl -MText::Autoformat -e'autoformat {all=>1,squeeze=>0}'
-
-" Filter highlighted section through perltidy
-map <leader>t :! perltidy
-
-" Find next "warn" statement
-map <leader>w :/^\s*warn
-
-" Set textwidth to 70
-map <leader>m :set tw=70
-
-" Check POD in current file
-map <leader>p :w ! perl -MPod::Checker -e 'podchecker shift' %
-
-map <leader>o :w ! perl -cw %
-
-" REM (comment) out highlighted section
-map <leader>c :s/^/#/<CR>
-" Un-REM
-map <leader>u :s/^#//<CR>
-
 if has("autocmd")
   au BufRead *.sxp,*.lisp call LispStuff()
   au BufRead *.html,*.svg,*.tmpl,*.tt,*.sql call HTMLStuff()
@@ -167,7 +144,24 @@ function PerlStuff()
     " Un-REM
     map <leader>u :s/^#//
 
-    " Get Perl to do syntax check with warnings on this file
+    " Check with Perl::Critic
+    map <leader>z :w ! perlcritic %
+
+    " Filter highlighted section through autoformat
+    map <leader>f :! perl -MText::Autoformat -e'autoformat {all=>1,squeeze=>0}'
+
+    " Filter highlighted section through perltidy
+    map <leader>t :! perltidy
+
+    " Find next "warn" statement
+    map <leader>w :/^\s*warn
+
+    " Set textwidth to 70
+    map <leader>m :set tw=70
+
+    " Check POD in current file
+    map <leader>p :w ! perl -MPod::Checker -e 'podchecker shift' %
+
     map <leader>o :w ! perl -cw %
 
 endfunction
@@ -206,3 +200,24 @@ function Toggle_spell()
         set spell
     endif
 endfunction
+
+"Uncomment if you have syntastic installed and want to use it for python
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
+"
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_open = 1
+"let g:syntastic_check_on_wq = 1
+"let g:syntastic_python_checkers = ["python"]
+"
+"function Py2()
+"    let g:syntastic_python_python_exec = '/Users/Scott/anaconda/bin/python'
+"endfunction
+"
+"function Py3()
+"    let g:syntastic_python_python_exec = '/Users/Scott/anaconda3/bin/python'
+"endfunction
+"
+"call Py3()   " default to Py3 because I try to use it when possible
