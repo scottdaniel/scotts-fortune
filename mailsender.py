@@ -1,5 +1,8 @@
 #!/usr/bin/env python
 
+from __future__ import print_function #python 3 style printing
+from pathlib import Path
+
 #This is a tiny script to call from another script to send you an e-mail when
 #A process is done
 #Setup to use gmail but you can change that if you like
@@ -27,8 +30,8 @@ def send_email(user, pwd, recipient, subject, body):
         server.login(gmail_user, gmail_pwd)
         server.sendmail(FROM, TO, message)
         server.close()
-        print 'successfully sent the mail'
+        print('successfully sent the mail')
     except:
-        print "failed to send mail"
+        print('failed to send mail')
 
 send_email('name@gmail.com','app-specific-password','name@gmail.com','smtplib test','hello, this is python')
