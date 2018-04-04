@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 """Docstring
 Python script to write a Python script
+
+Credit goes to Ken Youens-Clark <kyclark@email.arizona.edu> 
+with a little copy-editing by Scott Daniel <scottdaniel25@gmail.com>
 """
 
 import argparse
@@ -94,7 +97,7 @@ def main():
 # --------------------------------------------------
 def get_args():
     """get arguments"""
-    parser = argparse.ArgumentParser(description='Create Python script')
+    parser = argparse.ArgumentParser(description='Create a new Python3 script')
     parser.add_argument('program', help='Program name', type=str)
     parser.add_argument('-a', '--argparse', help='Use argparse',
                         dest='use_argparse', action='store_true')
