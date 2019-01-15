@@ -6,11 +6,11 @@ export INSTALL_DIR=$(pwd)
 echo Setting gitconfig
 cp ./gitconfig_default $HOME/.gitconfig
 #NB: the git filter needs "conda install jq" to work
-cp ./gitattributes_global $HOME/.gitconfig
+cp ./gitattributes_global $HOME/.gitattributes_global
 echo Setting up dir_colors from solarized
 cp ./dir_colors $HOME/.dir_colors
-echo Setting up newplrc for kyclark\'s new.pl script
-cp ./newplrc $HOME/.newplrc
+#echo Setting up newplrc for kyclark\'s new.pl script
+#cp ./newplrc $HOME/.newplrc
 
 echo Lets get some favorite gits
 cd $HOME
@@ -20,9 +20,9 @@ fi
 cd src
 
 git clone git@github.com:huyz/dircolors-solarized.git
-git clone git@github.com:kyclark/metagenomics-book.git
+#git clone git@github.com:kyclark/metagenomics-book.git
 git clone git@github.com:brentp/bio-playground.git
-cp ./kyclark/python/new_py/new_py.py $HOME #cool script for creating new pythons
+#cp ./kyclark/python/new_py/new_py.py $HOME #cool script for creating new pythons
 git clone https://github.com/tj/git-extras.git
 cd git-extras
 git checkout $(git describe --tags $(git rev-list --tags --max-count=1))
@@ -65,8 +65,8 @@ cd $INSTALL_DIR
 
 echo Setting up anaconda 
 echo This may take a while
-wget https://repo.continuum.io/archive/Anaconda2-5.0.1-Linux-x86_64.sh 
-bash Anaconda2-5.0.1-Linux-x86_64.sh
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh 
+bash Miniconda3-latest-Linux-x86_64.sh
 
 echo Setting up fortune
 tar -xzf src/fortune.0.2.tar.gz
