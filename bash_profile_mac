@@ -1,0 +1,158 @@
+###################
+# Aliaseseses #####
+###################
+alias nbstrip_jq="jq --indent 1 \
+    '(.cells[] | select(has(\"outputs\")) | .outputs) = []  \
+    | (.cells[] | select(has(\"execution_count\")) | .execution_count) = null  \
+    | .metadata = {\"language_info\": {\"name\": \"python\", \"pygments_lexer\": \"ipython3\"}} \
+    | .cells[].metadata = {} \
+    '"
+#see all hidden files and nothing else
+alias linvis='ls -d .?*'
+#start vim in "explorer" mode
+alias vime='vim -c Ex'
+#use gnu-sed instead of sed
+alias sed='gsed'
+alias ls='ls -G --color=always'
+alias l='ls -lahrt --color=always'
+alias gj='cd /Users/Scott/Google\ Drive/Misc/nano\ journal/; vim +startinsert "$(date)"'
+alias nod='echo You nod.'
+alias gohome='cd ~'
+alias apreset='networksetup -setairportpower en0 off; sleep 1; networksetup -setairportpower en0 on'
+alias vi='vim'
+alias vim='/Applications/MacVim.app/Contents/MacOS/vim'
+alias laugh='echo You laugh out loud!'
+alias lol='laugh'
+#using the most up-to-date version of sqlite3 (not the one with anaconda3)
+alias sqlite='/usr/local/bin/sqlite3'
+alias sqlite3='sqlite'
+#
+### not using macvim for right now
+#
+#alias vim='mvim'
+
+alias gitlogpretty='git log --pretty=format:"%h %ad | %s%d [%an]" --graph --date=short'
+
+###################
+#set umask@@@@!!!##
+###################
+umask 0002
+
+## Agave stuff #
+export AGAVE_USERNAME="scottdaniel"
+export AGAVE_PASSWORD="Blanfund5"
+export AGAVE_JSON_PARSER="jq"
+
+# Setting PATH for Python 2.7
+# The orginal version is saved in .bash_profile.pysave
+# OVERRIDING with anaconda3 because of its superiour package management
+#PATH="/Library/Frameworks/Python.framework/Versions/2.7/bin:${PATH}"
+PATH="/Users/Scott/agave-cli/bin:${PATH}" #temporarilly while i work on agave api
+PATH="$HOME/bin:${PATH}"
+#PATH="/Library/Frameworks/R.framework/Versions/3.2/Resources:${PATH}"
+PATH="$HOME/oracle_instantclient_basic:${PATH}"
+PATH="/usr/local/ncbi/blast/bin:${PATH}"
+
+# added by Anaconda3 
+#export PATH="/Users/Scott/anaconda3/bin:$PATH" #this is still available but going back to python2.7 for coursera class
+export PATH="/Users/Scott/anaconda/bin:$PATH"
+# for all those homebrews
+export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+export EDITOR="/Applications/MacVim.app/Contents/MacOS/vim"
+export VISUAL=$EDITOR
+
+##CONDA!!!!
+export CONDA="$HOME/anaconda"
+#export CONDA="$HOME/anaconda3"
+#export PYTHONPATH="$CONDA/pkgs:$CONDA/lib/python2.7/site-packages"
+export PYTHONPATH="$CONDA/pkgs"
+export PYTHON="$CONDA/bin/python"
+export PYTHONBIN="$CONDA/bin"
+
+PERL_MB_OPT="--install_base \"/Users/Scott/perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=/Users/Scott/perl5"; export PERL_MM_OPT;
+
+# Function for uploading a file to home directory on HPC
+function scphpc {
+	for file in $*; do
+		if [ -e "$file" ]; then	
+			scp $file scottdaniel@sftp.hpc.arizona.edu:/home/u18/scottdaniel/
+		else
+			echo "$file does not exist"
+		fi
+	done
+}
+# Function for uploading a file to hurwitzlab directory on HPC
+function scphl {
+	for file in $*; do
+		if [ -e "$file" ]; then	
+			scp $file scottdaniel@sftp.hpc.arizona.edu:/rsgrps/bhurwitz/scottdaniel/
+		else
+			echo "$file does not exist"
+		fi
+	done
+}
+
+# Function for downloading from tacc
+function scptacc {
+    for file in $*; do
+        scp ./ sdaniel@stampede2.tacc.utexas.edu:$path
+    done
+}
+
+# Function for downloading from uahpc
+function scpdl {
+    for file in $*; do
+        scp scottdaniel@sftp.hpc.arizona.edu:$* ./
+    done
+}
+#Added for perlbrew
+source ~/perl5/perlbrew/etc/bashrc
+
+#function to go up directories quickly
+up()
+{
+    cd $(eval "printf '../'%.0s {1..$1}") && pwd
+}
+
+test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
+
+#to go with the nbstrip_jq alias
+function nbstrip_all_cwd {
+    for nbfile in *.ipynb; do
+        echo "$( nbstrip_jq $nbfile )" > $nbfile
+    done
+    unset nbfile
+}
+
+# MANPATH ####
+export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+
+###################
+# ColoRS!!!!! #####
+###################
+#set CLICOLOR  
+#export LS_COLORS=exfxcxdxbxexexabagacad
+#now using gnu ls from homebrew coreutils
+eval `dircolors -b ~/.dir_colors`
+
+# Some people don't like fortune. If you uncomment the following lines,
+# you will have a fortune each time you log in ;-)
+#
+if [[ $(echo $HOSTNAME) == *"local"* ]]; then
+    if [ -x $PYTHONBIN/fortune3 ] ; then
+        echo
+        echo "=============== Quote Of The Day ==============="
+        echo
+        fortune3 $HOME/morefortunes/data/fortunes
+        echo
+        echo "================================================"
+        echo
+    fi
+fi
+
+export PATH="/usr/local/opt/gnu-getopt/bin:$PATH"
+
+echo -e "Default activating python3 environment\n"
+echo -e "Do "source activate base" to switch back to python2\n"
+source activate python3
