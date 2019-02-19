@@ -1,0 +1,10 @@
+# .bashrc
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+    . /etc/bashrc
+fi
+# User specific aliases and functions
+module load gcc
+module load univa
+#for miniconda 3
+. /home/danielsg/miniconda3/etc/profile.d/conda.sh

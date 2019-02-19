@@ -66,9 +66,9 @@ nmap :U :u
 nmap <F6> :exec '!'.getline('.')
 
 " REM (comment) out highlighted section
-map <leader>c :s/^/#/
+map <leader>c :s/^/#/<CR>
 " Un-REM
-map <leader>u :s/^#//
+map <leader>u :s/^#//<CR>
 
 if has("autocmd")
   au BufRead *.sxp,*.lisp call LispStuff()
@@ -169,8 +169,8 @@ function PythonStuff()
     "set sw=2
     "set tw=0
 
-    map <leader>c :s/^/#/
-    map <leader>u :s/^#//
+    map <leader>c :s/^/#/<CR>
+    map <leader>u :s/^#//<CR>
 
     map <leader>o :w ! python -m py_compile %
 endfunction

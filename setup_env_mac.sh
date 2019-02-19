@@ -32,23 +32,34 @@ cd $INSTALL_DIR
 echo And copy over some favorite programs \(extract and install needed\)
 cp src/* $HOME/src/
 
-if [ -e $HOME/.profile ] && [ ! -e $HOME/.profile.bkp ]; then
-    cp $HOME/.profile $HOME/.profile.bkp
-    cat ./profile_default_mac >> $HOME/.profile
-    echo Added stuff to .profile
+if [ -e $HOME/.bashrc ] && [ ! -e $HOME/.bashrc.bkp ]; then
+    cp $HOME/.bashrc $HOME/.bashrc.bkp
+    cat ./bashrc_mac >> $HOME/.bashrc
+    echo Added stuff to .bashrc
     echo Make sure to check for mistakes
 else
-    cp ./profile_default $HOME/.profile
-    echo Created a .profile for you
+    cp ./bashrc_mac $HOME/.bashrc
+    echo Created a .bashrc for you
 fi
+
+if [ -e $HOME/.bash_profile ] && [ ! -e $HOME/.bash_profile.bkp ]; then
+    cp $HOME/.bash_profile $HOME/.bash_profile.bkp
+    cat ./bash_profile_mac >> $HOME/.bash_profile
+    echo Added stuff to .bash_profile
+    echo Make sure to check for mistakes
+else
+    cp ./bash_profile_mac $HOME/.bash_profile
+    echo Created a .bash_profile for you
+fi
+
 
 if [ -e $HOME/.vimrc ] && [ ! -e $HOME/.vimrc.bkp ]; then
     cp $HOME/.vimrc $HOME/.vimrc.bkp
-    cat ./vimrc_default >> $HOME/.vimrc
+    cat ./vimrc_default_mac >> $HOME/.vimrc
     echo Added stuff to .vimrc
     echo Make sure to check for mistakes
 else
-    cp ./vimrc_default $HOME/.vimrc
+    cp ./vimrc_default_mac $HOME/.vimrc
     echo Created a .profile for you
 fi
 
@@ -72,30 +83,7 @@ echo Setting up fortunes
 cd $INSTALL_DIR
 cp -r fortunes/ ~/
 
-#echo Setting up perlbrew
-##curl -L http://install.perlbrew.pl | bash
-#sleep 1
-##perlbrew init
-#echo "#Added for perlbrew" >> ~/.profile
-#echo "source ~/perl5/perlbrew/etc/bashrc" >> ~/.profile
-#echo Have to do the rest on your own
-#echo by opening a new terminal 
-#echo and running setup_perlbrew.sh
-#read -p "Press [Enter] key"
-#
-#Not needed with anaconda
-#echo Setting up pip
-#python ./get-pip.py install --root $HOME
-#
-#if [ -z $(which pip) ]; then
-#    echo pip didn\'t install aborting
-#    exit 1
-#else
-#    echo Setting up numpy ::crosses fingers::
-#    pip install --root $HOME numpy
-#    echo Setting up scipy
-#    pip install --root $HOME scipy
-#fi
-#
+echo "RUN after_conda_setup!!!"
+
 echo All done! \{hopefully\}
 
